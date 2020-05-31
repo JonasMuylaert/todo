@@ -1,11 +1,11 @@
-const express = require('express');
-const Todo = require('../model/todoModel');
-const pool = require('../util/db');
+const express = require("express");
+const Todo = require("../model/todoModel");
+const pool = require("../util/db");
 
 //get all TODOS
 exports.getTodos = async (req, res, next) => {
 	try {
-		const { rows } = await pool.query('SELECT * FROM todo');
+		const { rows } = await pool.query("SELECT * FROM todo");
 		res.json(rows);
 	} catch (err) {
 		console.log(err.message);
@@ -24,16 +24,10 @@ exports.getTodo = async (req, res, next) => {
 //create todo
 exports.postCreateTodo = async (req, res, next) => {
 	try {
-		const { description } = req.body;
-		const newTodo = new Todo(
-			'test',
-			'test',
-			description,
-			'2020-04-27',
-			'very-urgent'
-		);
+		const { title, date, description, urgency } = req.body;
+		const newTodo = new Todo(title, "test", description, date, urgency);
 		newTodo.save();
-		res.json(newTodo);
+		res.status(302);
 	} catch (err) {
 		console.log(err.message);
 	}
