@@ -1,4 +1,4 @@
-const { tableNames } = require('../../src/constants/constants');
+const { tableNames } = require('../../server/constants/constants');
 const Knex = require('knex');
 
 /**@param {Knex} knex*/
@@ -34,9 +34,10 @@ exports.up = async function (knex) {
 		table.string('title', 100).notNullable().unique();
 		table.datetime('date_todo').notNullable();
 		table.string('urgency', 20).notNullable();
+		table.integer('done').defaultTo(0);
+		table.text('description');
 		references(table, 'user_id', 'users.id');
 		references(table, 'list_id', 'lists.id');
-		table.text('content');
 		defaultColumns(table);
 	});
 
@@ -52,9 +53,12 @@ exports.up = async function (knex) {
 };
 
 exports.down = async function (knex) {
-	//VOLGORDE!!
-	await knex.schema.dropTable(tableNames.comments);
-	await knex.schema.dropTable(tableNames.todos);
-	await knex.schema.dropTable(tableNames.lists);
-	await knex.schema.dropTable(tableNames.users);
+	await Promise.all(
+		[
+			tableNames.comments,
+			tableNames.todos,
+			tableNames.lists,
+			tableNames.users,
+		].map(tableName => knex.schema.dropTable(tableName))
+	);
 };

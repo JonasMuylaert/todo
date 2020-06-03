@@ -1,32 +1,27 @@
 import React, { useState, useContext } from 'react';
 import TodoContext from '../context/todo/todoContext';
 import Todos from '../components/Todos.js';
-import AddToDo from '../layout/AddToDo';
+import AddToDo from '../components/AddToDo';
 
-import { useTodos } from '../hooks/useTodos';
-
+import { useGetTodos } from '../hooks/useGetTodos';
+import { useSearch } from '../hooks/useSearch';
 const Home = () => {
 	const todoContext = useContext(TodoContext);
 
 	const [visible, setVisible] = useState(false);
 	const [query, setQuery] = useState('');
-	const [lastElement, setLastElement] = useState(null);
 
-	const { loading, error, setPage, page } = todoContext;
+	const { loading, error, page } = todoContext;
 	const setVis = val => {
 		setVisible(val);
 	};
 	const handleSearch = e => {
 		setQuery(e.target.value);
-		setPage(1);
 	};
-
-	const lastEl = val => {
-		setLastElement(val);
-		console.log(lastElement);
+	const hasMore = {
+		todoHasMore: useGetTodos(page),
+		// searchHasMore: useSearch(query, page),
 	};
-
-	const { hasMore } = useTodos(page, query);
 
 	return (
 		<div>
@@ -34,20 +29,19 @@ const Home = () => {
 			{error && <div className="error">An error occured...Try again later</div>}
 			<input
 				value={query}
-				className="form__input--text"
+				className="form__input form__input--search"
 				type="text"
 				onChange={handleSearch}
 			/>
-
-			<Todos hasMore={hasMore} lastEl={lastEl} />
+			<button className="btn" onClick={() => setVisible(!visible)}>
+				<a href="#add-todo">Add Todo</a>
+			</button>
+			<Todos key={1} hasMore={hasMore.todoHasMore} />
 			{loading && (
 				<div className="loading">
 					<i className="fas fa-circle-notch loading--spinner"></i>
 				</div>
 			)}
-			<button className="btn" onClick={() => setVisible(!visible)}>
-				<a href="#add-todo">Add Todo</a>
-			</button>
 		</div>
 	);
 };

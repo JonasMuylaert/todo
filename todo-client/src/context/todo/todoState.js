@@ -2,7 +2,14 @@ import React, { useReducer } from 'react';
 import TodoContext from './todoContext';
 import TodoReducer from './todoReducer';
 
-import { SET_TODOS, SET_LOADING, SET_ERROR, SET_PAGE } from '../types';
+import {
+	SET_TODOS,
+	SET_LOADING,
+	SET_ERROR,
+	SET_PAGE,
+	CLEAR_TODOS,
+	SET_TODO,
+} from '../types';
 
 const TodoState = props => {
 	//INIT
@@ -23,7 +30,11 @@ const TodoState = props => {
 			payload: data,
 		});
 	};
-
+	const clearTodos = () => {
+		dispatch({
+			type: CLEAR_TODOS,
+		});
+	};
 	const setLoading = val => {
 		dispatch({
 			type: SET_LOADING,
@@ -31,7 +42,13 @@ const TodoState = props => {
 		});
 	};
 
-	const setPage = () => {
+	const setPage = number => {
+		if (number) {
+			return dispatch({
+				type: SET_PAGE,
+				payload: 1,
+			});
+		}
 		dispatch({
 			type: SET_PAGE,
 		});
@@ -40,6 +57,17 @@ const TodoState = props => {
 		dispatch({
 			type: SET_ERROR,
 			payload: val,
+		});
+	};
+
+	const setTodo = e => {
+		const target = e.target;
+		const name = target.name;
+		const value = target.value;
+
+		dispatch({
+			type: SET_TODO,
+			payload: { [name]: value },
 		});
 	};
 	return (
@@ -54,6 +82,8 @@ const TodoState = props => {
 				setLoading,
 				setError,
 				setPage,
+				setTodo,
+				clearTodos,
 			}}
 		>
 			{props.children}

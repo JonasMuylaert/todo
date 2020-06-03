@@ -8,6 +8,7 @@ const Navbar = () => {
 				<ul className="nav__list">
 					<li>
 						<NavLink
+							exact
 							to="/"
 							className="nav__list-item"
 							activeClassName="nav__list-item--active"
@@ -18,6 +19,7 @@ const Navbar = () => {
 					</li>
 					<li>
 						<NavLink
+							exact
 							to="/calendar"
 							className="nav__list-item"
 							activeClassName="nav__list-item--active"
@@ -28,6 +30,7 @@ const Navbar = () => {
 					</li>
 					<li>
 						<NavLink
+							exact
 							to="/user"
 							className="nav__list-item"
 							activeClassName="nav__list-item--active"
