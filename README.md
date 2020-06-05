@@ -8,15 +8,17 @@ To run locally:
 
 - cd todo-server
 - make .env file in folder with following values:
+
   - SERVER_PORT=(DEFAULT IS 5000)
   - POSTGRES_PASSWORD=(REQUIRED)
   - POSTGRES_USER=(REQUIRED)
   - POSTGRES_DB=(REQUIRED)
   - SECRET_TOKEN=('can be any character')(REQUIRED)
 
-## RUN: docker-compose up -d
+- RUN: docker-compose up -d
 
 (check the logs => docker-comose info -f ctf+c to close)
+
 #CLIENT
 -cd todo-client
 
