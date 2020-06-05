@@ -7,8 +7,9 @@ const cors = require('cors');
 
 //local imports
 const todoRoutes = require('./api/todos/todoRoutes');
-const { notFound, errorHandler } = require('./middlewares/404');
-
+const { notFound, errorHandler } = require('./middlewares/Error');
+const auth = require('./auth/authRouter');
+const listRoutes = require('./api/lists/listRoutes');
 //init
 const app = express();
 
@@ -20,7 +21,9 @@ app.use(compression()); //compresses incoming requests
 app.use(helmet()); //secure headers
 
 //ROUTES
-app.use('/api/v1', todoRoutes);
+app.use('/auth', auth);
+app.use('/api/todos', todoRoutes);
+app.use('/api/lists', listRoutes);
 
 app.use(notFound); //ALTIJD LAATST
 app.use(errorHandler); //ALTIJD LAATST

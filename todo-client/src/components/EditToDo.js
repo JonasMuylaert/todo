@@ -1,26 +1,38 @@
 import React, { useContext } from 'react';
 import TodoContext from '../context/todo/todoContext';
+//UTILS
+import ApiHelper from '../util/ApiHelper';
+//CUSTOM HOOKS
+import { useForm } from '../hooks/useForm';
 
-import { ApiHelper } from '../util/ApiHelper';
-
-const EditToDo = props => {
+const EditToDo = ({
+	visible,
+	refr,
+	id,
+	title,
+	urgency,
+	description,
+	date_todo,
+	setError,
+}) => {
+	const { handleChange, handleSubmit, values } = useForm(submit);
 	const todoContext = useContext(TodoContext);
-	const apiHelper = new ApiHelper(todoContext);
-	const { setTodo, todo, page } = todoContext;
-	const handleSubmit = e => {
-		e.preventDefault();
-		apiHelper
-			.editTodo(props.id, todo)
-			.then(res => apiHelper.getTodo(props.id))
-			.then(res => {
-				props.setTodo(...res.data);
-				props.visible(false);
-			});
-	};
+	const { fetchData } = todoContext;
+	async function submit() {
+		try {
+			//Send addtodo
+			const res = await ApiHelper.updateTodo(id, values);
+			refr();
+			fetchData();
+			visible(false);
+		} catch (err) {
+			setError(err);
+		}
+	}
 	return (
-		<div className="form-container" id="edit-todo">
-			<form className="form-container__form form" onSubmit={handleSubmit}>
-				<span className="close-tag" onClick={() => props.visible(false)}>
+		<div className="popup-container" id="edit-todo">
+			<form className="popup-container__content form" onSubmit={handleSubmit}>
+				<span className="close-tag" onClick={() => visible(false)}>
 					&times;
 				</span>
 				<label forhtml="title" className="form__label">
@@ -31,8 +43,8 @@ const EditToDo = props => {
 					name="title"
 					id="title"
 					className="form__input"
-					onChange={setTodo}
-					placeholder={props.title}
+					onChange={handleChange}
+					placeholder={title}
 				/>
 				<label forhtml="date" className="form__label">
 					Todo Date
@@ -42,8 +54,8 @@ const EditToDo = props => {
 					name="date_todo"
 					id="date"
 					className="form__input"
-					onChange={setTodo}
-					placeholder={props.date_todo}
+					onChange={handleChange}
+					placeholder={date_todo}
 				/>
 				<label forhtml="urgency" className="form__label">
 					Urgency
@@ -52,8 +64,8 @@ const EditToDo = props => {
 					name="urgency"
 					id="urgency"
 					className="form__input"
-					onChange={setTodo}
-					placeholder={props.urgency}
+					onChange={handleChange}
+					value={urgency}
 				>
 					<option value="urgent">urgent</option>
 					<option value="very-urgent">very-urgent</option>
@@ -68,8 +80,8 @@ const EditToDo = props => {
 					maxLength="255"
 					className="form__input"
 					placeholder="Insert a description"
-					onChange={setTodo}
-					placeholder={props.description}
+					onChange={handleChange}
+					placeholder={description}
 				></textarea>
 				<button type="submit" className="btn">
 					Edit todo

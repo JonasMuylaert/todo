@@ -1,90 +1,99 @@
 const Todo = require('./todoModel');
+const User = require('../users/userModel');
 
-exports.getTodos = async (req, res) => {
+exports.getTodos = async (req, res, next) => {
 	const limit = parseInt(req.query.limit);
 	const page = parseInt(req.query.page);
+	const list = parseInt(req.query.list);
 	const title = req.query.title;
-
 	if (!title) {
-		//limit = number
-		//page = number
-		//title = undefined
-		const todos = await Todo.getTodos(page, limit);
-		res.status(200).json(todos);
+		try {
+			const todos = await Todo.getTodos(page, limit);
+			res.status(200).json(todos);
+		} catch (error) {
+			next(new Error(error, 'failed to fetch todos'));
+		}
 	} else if (title) {
-		/*
-			limit = Nan,
-			page = Nan,
-			title = string
-		*/
-		const todos = await Todo.searchTodo(title);
-		res.status(200).json(todos);
+		try {
+			const todos = await Todo.searchTodo(title);
+			res.status(200).json(todos);
+		} catch (error) {
+			next(new Error(error, 'failed to fetch todos'));
+		}
+	}
+};
+exports.getTodoByList = async (req, res, next) => {
+	if (!req.query.list) return next();
+	const list = req.query.list;
+	try {
+		const todos = await Todo.getTodoByList(list);
+		res.status(200).json({
+			message: 'jaah',
+			todos: todos,
+		});
+	} catch (error) {
+		res.status(500);
+		next(new Error(error));
+	}
+};
+exports.getTodoById = async (req, res, next) => {
+	const id = req.params.id;
+	try {
+		const todo = await Todo.getTodoById(id);
+		res.json(todo);
+	} catch (error) {
+		console.log(error);
+		next(new Error('Error getting todo'));
 	}
 };
 
-exports.getTodo = async (req, res) => {
-	const id = req.params.id;
-
-	const todo = await Todo.getTodo(id);
-
-	res.status(200).json(todo);
-};
-
-exports.addTodo = async (req, res) => {
+exports.addTodo = async (req, res, next) => {
 	console.log(req.body);
 	const todo = new Todo({
 		title: req.body.title,
 		date_todo: req.body.date_todo,
 		urgency: req.body.urgency,
 		description: req.body.description,
-		list: null,
+		user_id: req.user,
+		list_id: req.body.list_id ? req.body.list_id : 1,
 	});
 	try {
-		const result = await todo.addTodo();
+		const result = await todo.add();
 		res.status(201).json(result);
 	} catch (error) {
-		res.status(500).json(error);
+		res.status(500);
+		next(new Error('Error adding todo'));
 	}
 };
 
-exports.delTodo = async (req, res) => {
+exports.delTodo = async (req, res, next) => {
 	const id = req.params.id;
-
+	const userId = req.user;
 	try {
-		const delTodo = await Todo.deleteTodo(id);
+		const delTodo = await Todo.deleteTodo(id, userId);
 		res.json({
 			message: 'Item deleted',
 			todo: delTodo,
 		});
 	} catch (error) {
-		res.status(500).json(error);
+		next(new Error('Error deleting todo'));
 	}
 };
 
 exports.updateTodo = async (req, res, next) => {
 	const id = req.params.id;
-	console.log(id);
+	const userId = req.user;
+	req.body.updated_at = new Date();
 	const body = req.body;
-
-	if (!body) {
-		next();
-	}
 	try {
-		const updatedTodo = await Todo.updateTodo(id, body);
-		res.json({
+		const updatedTodo = await Todo.updateTodo(id, userId, body);
+		res.status(202).json({
 			message: 'Item updated',
 			todo: updatedTodo,
 		});
 	} catch (error) {
-		res.status(500).json(error);
+		console.log(error);
+		res.status(500);
+		next(new Error('Error updating todo'));
 	}
-};
-
-exports.updateDone = async (req, res) => {
-	const id = req.params.id;
-	const done = req.query.done;
-
-	const result = await Todo.setDone(id, done);
-
-	res.json(result);
 };

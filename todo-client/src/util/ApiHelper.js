@@ -1,93 +1,82 @@
 import axios from 'axios';
-export class ApiHelper {
-	url = `http://localhost:5000/api/v1/`;
-	constructor(context) {
-		this.context = context;
-	}
-	async makeGetRequest(id, page) {
-		const { setLoading, setError, setTodos } = this.context;
-		setLoading(true);
-		setError(false);
-		const res = axios({
-			method: 'GET',
-			url: id ? this.url.concat(id) : this.url,
-			params: page ? { page: page, limit: 10 } : null,
-		})
-			.then(res => {
-				setTodos(res.data);
-				setLoading(false);
-				return res;
-			})
-			.catch(err => {
-				console.log(err);
-				setError(true);
+class ApiHelper {
+	url = `http://localhost:5000/api/`;
+
+	async getTodos(query) {
+		try {
+			const res = await axios({
+				method: 'GET',
+				url: this.url.concat('todos/'),
+				params: query,
 			});
-		return res;
-	}
-	async makePostRequest(axiosObj) {
-		const { setLoading, setError } = this.context;
-		setLoading(true);
-		setError(false);
-		const res = axios(axiosObj)
-			.then(res => {
-				console.log(res);
-				setLoading(false);
-				return res;
-			})
-			.catch(err => {
-				console.log(err);
-				setError(true);
-			});
-		return res;
-	}
-	async getTodos(page) {
-		const res = await this.makeGetRequest(null, page);
-		return res;
+			return res;
+		} catch (error) {
+			throw Error(error);
+		}
 	}
 	async getTodo(id) {
-		// const res = await axios.get(this.url + id);
-		const res = await this.makeGetRequest(id, null);
+		try {
+			const res = await axios({
+				method: 'GET',
+				url: this.url.concat(`todos/${id}`),
+			});
 
-		return res;
+			return res;
+		} catch (error) {
+			throw Error(error);
+		}
 	}
 	async deleteTodo(id) {
-		const res = await this.makePostRequest({
-			method: 'DELETE',
-			url: this.url.concat(`delete/${id}`),
-		});
-		return res;
+		try {
+			const res = axios({
+				method: 'DELETE',
+				url: this.url.concat(`todos/delete/${id}`),
+				headers: { Authorization: localStorage.Authorization },
+			});
+			return res;
+		} catch (error) {
+			throw Error(error);
+		}
 	}
 	async addTodo(todo) {
-		const res = await this.makePostRequest({
-			method: 'POST',
-			url: this.url.concat('add'),
-			data: todo,
-		});
-		return res;
-	}
-	async editTodo(id, todo) {
-		const res = await this.makePostRequest({
-			method: 'PUT',
-			url: this.url.concat(`update/${id}`),
-			data: todo,
-		});
+		try {
+			const res = await axios({
+				method: 'POST',
+				url: this.url.concat('todos/add'),
+				data: todo,
+				headers: { Authorization: localStorage.Authorization },
+			});
 
-		return res;
-	}
-
-	async setDone(id, done) {
-		let par;
-		if (done) {
-			par = 0;
-		} else {
-			par = 1;
+			return res;
+		} catch (error) {
+			throw Error(error);
 		}
-		const res = await this.makePostRequest({
-			method: 'PUT',
-			url: this.url.concat(`done/${id}`),
-			params: { done: par },
-		});
+	}
+	async updateTodo(id, todo) {
+		try {
+			const res = await axios({
+				method: 'PUT',
+				url: this.url.concat(`todos/update/${id}`),
+				data: todo,
+				headers: { Authorization: localStorage.Authorization },
+			});
+			return res;
+		} catch (error) {
+			throw Error(error);
+		}
+	}
 
-		return res;
+	async getLists() {
+		try {
+			const res = await axios({
+				method: 'GET',
+				url: this.url.concat('lists/'),
+				headers: { Authorization: localStorage.Authorization },
+			});
+			return res;
+		} catch (error) {
+			throw Error(error);
+		}
 	}
 }
+export default new ApiHelper();

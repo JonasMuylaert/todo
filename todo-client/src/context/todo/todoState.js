@@ -1,24 +1,16 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import TodoContext from './todoContext';
 import TodoReducer from './todoReducer';
 
-import {
-	SET_TODOS,
-	SET_LOADING,
-	SET_ERROR,
-	SET_PAGE,
-	CLEAR_TODOS,
-	SET_TODO,
-} from '../types';
+import { SET_TODOS, SET_LOADING, SET_ERROR } from '../types';
 
+import ApiHelper from '../../util/ApiHelper';
 const TodoState = props => {
 	//INIT
 	const initialState = {
 		todos: [],
-		todo: {},
-		error: false,
-		loading: true,
-		page: 1,
+		error: null,
+		loading: false,
 	};
 
 	const [state, dispatch] = useReducer(TodoReducer, initialState);
@@ -30,60 +22,47 @@ const TodoState = props => {
 			payload: data,
 		});
 	};
-	const clearTodos = () => {
-		dispatch({
-			type: CLEAR_TODOS,
-		});
-	};
-	const setLoading = val => {
+	const setLoading = loading => {
 		dispatch({
 			type: SET_LOADING,
-			payload: val,
+			payload: loading,
 		});
 	};
-
-	const setPage = number => {
-		if (number) {
-			return dispatch({
-				type: SET_PAGE,
-				payload: 1,
-			});
-		}
-		dispatch({
-			type: SET_PAGE,
-		});
-	};
-	const setError = val => {
+	const setError = error => {
 		dispatch({
 			type: SET_ERROR,
-			payload: val,
+			payload: error,
 		});
 	};
 
-	const setTodo = e => {
-		const target = e.target;
-		const name = target.name;
-		const value = target.value;
+	const fetchData = async () => {
+		setError(null);
+		try {
+			setLoading(true);
 
-		dispatch({
-			type: SET_TODO,
-			payload: { [name]: value },
-		});
+			const res = await ApiHelper.getTodos();
+			setTodos(res.data);
+		} catch (error) {
+			setError(error);
+		} finally {
+			setLoading(false);
+		}
 	};
+
+	useEffect(() => {
+		fetchData();
+	}, []);
+
 	return (
 		<TodoContext.Provider
 			value={{
 				todos: state.todos,
-				todo: state.todo,
 				error: state.error,
 				loading: state.loading,
-				page: state.page,
+				fetchData,
 				setTodos,
 				setLoading,
 				setError,
-				setPage,
-				setTodo,
-				clearTodos,
 			}}
 		>
 			{props.children}
