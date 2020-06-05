@@ -1,4 +1,5 @@
 const faker = require('faker');
+const bcrypt = require('bcrypt');
 
 const {
 	tableNames,
@@ -17,7 +18,7 @@ exports.seed = async knex => {
 		first_name: 'jonas',
 		last_name: 'Muylaert',
 		email: 'jonas.muylaert@live.com',
-		password: passWord,
+		password: await bcrypt.hash(passWord, 12),
 	};
 
 	const lists = {

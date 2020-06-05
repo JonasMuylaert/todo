@@ -39,7 +39,6 @@ const TodoState = props => {
 		setError(null);
 		try {
 			setLoading(true);
-
 			const res = await ApiHelper.getTodos();
 			setTodos(res.data);
 		} catch (error) {

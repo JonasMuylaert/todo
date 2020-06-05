@@ -34,6 +34,7 @@ To run locally (NOT WORKING ATM, docker-compose ERRCONN refused err):
 - [x] making USER model
 - [x] server side auth/validation
 - [x] route protection
+- [ ] docker secrets
 - [ ] Creating List model ...working on it
 - [ ] Comment model ...
 - [ ] ...

@@ -42,21 +42,22 @@ const Todos = () => {
 	return (
 		<div className="todos-container">
 			<ul className="todos">
-				{todos.map((todo, index) => {
-					return (
-						<Todo
-							key={todo.id}
-							id={todo.id}
-							urgency={todo.urgency}
-							firstName={todo.first_name}
-							lastName={todo.last_name}
-							date={todo.date_todo}
-							done={todo.done}
-						>
-							{renderTodo(todo, index)}
-						</Todo>
-					);
-				})}
+				{todos.length > 1 &&
+					todos.map((todo, index) => {
+						return (
+							<Todo
+								key={todo.id}
+								id={todo.id}
+								urgency={todo.urgency}
+								firstName={todo.first_name}
+								lastName={todo.last_name}
+								date={todo.date_todo}
+								done={todo.done}
+							>
+								{renderTodo(todo, index)}
+							</Todo>
+						);
+					})}
 			</ul>
 		</div>
 	);
