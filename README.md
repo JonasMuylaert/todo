@@ -3,10 +3,16 @@
 ### STACK
 
 - backend:
+
   - nodejs
   - express
   - postgreSQL
   - knexJs(query-builder/migrations/seeds)
+
+- frontend:
+
+  - React
+  - Sass
 
 ### SERVER INSTALL
 
