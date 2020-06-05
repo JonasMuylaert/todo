@@ -7,7 +7,14 @@ To run locally (NOT WORKING ATM, docker-compose ERRCONN refused err):
 # SERVER
 
 - cd todo-server
+- make .env file with:
+  - SERVER_PORT=
+  - POSTGRES_PASSWORD=
+  - POSTGRES_USER=
+  - POSTGRES_DB=
+  - SECRET_TOKEN=('can be character')
 - docker-compose up -d
+-
 
 #CLIENT
 -cd todo-client
