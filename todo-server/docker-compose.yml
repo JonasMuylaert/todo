@@ -3,7 +3,6 @@ version: '3.8'
 services:
   server:
     container_name: todo-server
-    # command: sh -c ". start.sh"
     restart: always
     build: .
     environment:
@@ -34,5 +33,6 @@ services:
     restart: always
     ports:
       - 8080:8080
+
 volumes:
   db-data:

@@ -2,20 +2,21 @@
 
 Todo Node,Express,Knexjs,React
 
-To run locally (NOT WORKING ATM, docker-compose ERRCONN refused err):
+To run locally:
 
-# SERVER
+## SERVER
 
 - cd todo-server
-- make .env file with:
-  - SERVER_PORT=
-  - POSTGRES_PASSWORD=
-  - POSTGRES_USER=
-  - POSTGRES_DB=
-  - SECRET_TOKEN=('can be character')
-- docker-compose up -d
--
+- make .env file in folder with following values:
+  - SERVER_PORT=(DEFAULT IS 5000)
+  - POSTGRES_PASSWORD=(REQUIRED)
+  - POSTGRES_USER=(REQUIRED)
+  - POSTGRES_DB=(REQUIRED)
+  - SECRET_TOKEN=('can be any character')(REQUIRED)
 
+## RUN: docker-compose up -d
+
+(check the logs => docker-comose info -f ctf+c to close)
 #CLIENT
 -cd todo-client
 
@@ -50,4 +51,7 @@ To run locally (NOT WORKING ATM, docker-compose ERRCONN refused err):
 - [x] setup React context API for global state state hooks for local state
       => memory leak for errors ??
 - [ ] client side validation!
+- [ ] client side error checking
+- [ ] fix router (buggy)
+- [ ] fix apiHook, or something... redundant repeating
 - [ ] .....
