@@ -16,6 +16,12 @@
 
 ### SERVER INSTALL
 
+Can still be buggy.
+empty db ?
+
+- knex migrate:latest
+- knex seed:run --specific 01_normal.js
+
 1. install docker
 2. cd todo-server
 3. make .env file in folder with following values:
