@@ -26,7 +26,7 @@
 - POSTGRES_DB=(REQUIRED)
 - SECRET_TOKEN=('can be any character')(REQUIRED)
 
-4. RUN: docker-compose up -d
+4. RUN: docker-compose up -d (In windows run powershell)
 
 5. check the logs => docker-comose info -f ctf+c to close
 
@@ -49,7 +49,7 @@
 - [x] making USER model
 - [x] server side auth/validation
 - [x] route protection
-- [ ] docker secrets
+- [ ] docker secrets??
 - [ ] Creating List model ...working on it
 - [ ] Comment model ...
 - [ ] ...
@@ -69,3 +69,7 @@
 - [ ] fix router (buggy)
 - [ ] fix apiHook, or something... redundant repeating
 - [ ] .....
+
+#### KNOWN BUGS:
+
+- [ ] database syncing
