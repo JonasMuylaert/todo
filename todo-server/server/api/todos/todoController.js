@@ -4,7 +4,6 @@ const User = require('../users/userModel');
 exports.getTodos = async (req, res, next) => {
 	const limit = parseInt(req.query.limit);
 	const page = parseInt(req.query.page);
-	const list = parseInt(req.query.list);
 	const title = req.query.title;
 	if (!title) {
 		try {

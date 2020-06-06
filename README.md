@@ -49,6 +49,7 @@
 - [x] making USER model
 - [x] server side auth/validation
 - [x] route protection
+- [ ] send all correct status codes
 - [ ] docker secrets??
 - [ ] Creating List model ...working on it
 - [ ] Comment model ...
@@ -64,12 +65,16 @@
 - [x] setup react-router
 - [x] setup React context API for global state state hooks for local state
       => memory leak for errors ??
+- [ ] Login/signup error => don't redirect
+- [ ] signup correct => redirect to login page
+- [ ] login correct => redirect to home page
 - [ ] client side validation!
 - [ ] client side error checking
+- [ ] client side remove error when confirmed
 - [ ] fix router (buggy)
 - [ ] fix apiHook, or something... redundant repeating
 - [ ] .....
 
 #### KNOWN BUGS:
 
-- [ ] database syncing
+- [ ] database syncing when first logged in

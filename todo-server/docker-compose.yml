@@ -3,8 +3,17 @@ version: '3.8'
 services:
   server:
     container_name: todo-server
+    command: sh -c '. /todo-server/app/start.sh'
+    image: node:12-alpine
+    working_dir: /todo-server
     restart: always
-    build: .
+    # build: .
+    volumes:
+      #ignores node_modules van host
+      - node_modules:/todo-server/app/node_modules
+      - ./:/todo-server/app
+      #Alles van deze folder naar /todo-server/app/
+      #BIND volume
     environment:
       SERVER_HOST: postgres
       SECRET_TOKEN: ${SECRET_TOKEN}
@@ -36,3 +45,4 @@ services:
 
 volumes:
   db-data:
+  node_modules:
