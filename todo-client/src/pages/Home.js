@@ -36,9 +36,12 @@ const Home = () => {
 		}
 	};
 	const fetchListNames = async () => {
-		const res = await ApiHelper.getLists();
-
-		setLists(res.data);
+		try {
+			const res = await ApiHelper.getLists();
+			setLists(res.data);
+		} catch (error) {
+			setError(error.response);
+		}
 	};
 	useEffect(() => {
 		fetchData();

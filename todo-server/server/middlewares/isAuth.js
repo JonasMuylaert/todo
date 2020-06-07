@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken');
 
-const User = require('../api/users/userModel');
-
 exports.isAuth = (req, res, next) => {
 	try {
 		const token = req.header('Authorization');
@@ -16,7 +14,7 @@ exports.isAuth = (req, res, next) => {
 
 		next();
 	} catch (error) {
-		res.status(500);
+		res.status(401);
 		next(new Error(error));
 	}
 };

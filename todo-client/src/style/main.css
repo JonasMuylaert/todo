@@ -160,6 +160,12 @@ body {
       color: white; }
   .btn--yellow {
     background-color: #d9d636; }
+  .btn--big {
+    float: left;
+    width: 30vw;
+    display: block;
+    padding: 3rem;
+    margin: 2rem; }
 
 .form {
   margin: 1rem; }
@@ -380,6 +386,47 @@ body {
     text-transform: uppercase;
     font-weight: 200;
     color: grey; }
+
+.list-info {
+  float: left;
+  display: block;
+  margin: auto;
+  height: 50vh;
+  width: 100%; }
+  .list-info__list {
+    list-style-type: none; }
+  .list-info__list-item {
+    margin: 2rem 0;
+    padding: 3rem 0;
+    border-radius: 5px;
+    font-size: 3rem; }
+  .list-info__todos {
+    margin: 2rem 4rem;
+    background-color: white; }
+  .list-info__todos-list {
+    list-style-type: none;
+    padding: 2rem;
+    border-radius: 5px; }
+  .list-info__todos-list > a {
+    color: black;
+    text-decoration: none;
+    font-size: 2rem; }
+  .list-info__span {
+    margin: 0 1rem; }
+  .list-info__icons {
+    transform: translate(-3px, -5px); }
+    .list-info__icons--info:hover {
+      animation: spinner 1s ease-in-out infinite; }
+
+.user {
+  margin: 0 3rem; }
+  .user::after {
+    content: '';
+    display: table;
+    clear: both; }
+  .user__nav {
+    display: flex;
+    justify-content: space-around; }
 
 .login {
   width: 50vw;

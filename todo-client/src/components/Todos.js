@@ -42,7 +42,7 @@ const Todos = () => {
 	return (
 		<div className="todos-container">
 			<ul className="todos grid">
-				{todos.length > 1 &&
+				{todos.length >= 1 &&
 					todos.map((todo, index) => {
 						return (
 							<Todo

@@ -60,3 +60,16 @@ exports.addList = async (req, res, next) => {
 		next(new Error('failed adding list'));
 	}
 };
+
+exports.deleteList = async (req, res, next) => {
+	console.log(req.query.id);
+	const listId = req.query.id;
+	try {
+		const deletedList = await List.deleteList(listId, req.user);
+		res.status(200).json({
+			message: 'list deleted',
+		});
+	} catch (error) {
+		next(new Error('failed deleting list'));
+	}
+};

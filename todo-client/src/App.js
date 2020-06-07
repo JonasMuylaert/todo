@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import TodoInfo from './pages/TodoInfo';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import User from './pages/User';
 
 import TodoState from './context/todo/todoState';
 import UserState from './context/user/userState';
@@ -22,6 +23,7 @@ function App() {
 						<Navbar />
 					</Header>
 					<Switch>
+						<Route path="/user" exact component={User} />
 						<Route path="/login" exact component={Login} />
 						<Route path="/signup" component={SignUp} />
 						<Route path="/:id" render={props => <TodoInfo {...props} />} />

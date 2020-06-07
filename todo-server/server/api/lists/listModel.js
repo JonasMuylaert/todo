@@ -23,4 +23,10 @@ module.exports = class List {
 	addList() {
 		return knex(tableNames.lists).insert(this).returning('id');
 	}
+	static deleteList(listId, userId) {
+		return knex(tableNames.lists)
+			.where('id', listId)
+			.andWhere('user_id', userId)
+			.del();
+	}
 };

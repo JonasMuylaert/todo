@@ -63,6 +63,12 @@ empty db ?
   - [x] display color of todos in a list
   - [x] check if already exists
   - [x] update todo when added to list
+  - [x] show lists
+  - [ ] edit lists:
+  - [x] acces todos from whitin list
+  - [ ] removing todos from list?
+  - [x] delete lists
+- JWT token expired -> logout and redirect...
 - [ ] Comment model ...
 - [ ] ...
 
@@ -70,7 +76,7 @@ empty db ?
 
 - [x] create react app
 - [x] fetch data from API...to be continued
-      => useApi hook not working !? repeating too much
+- [ ] useApi hook not working !? repeating too much !!!!
 - [x] login /signup
 - [x] basic styling...to be continued
 - [x] setup react-router
@@ -81,12 +87,14 @@ empty db ?
 - [x] login correct => redirect to home page
 - [ ] client side validation!
 - [ ] client side error checking...busy
+- [ ] remove popups
 - [x] client side remove error when confirmed
-- [ ] fix router (buggy)
+- [x] fix router (buggy)
+- [ ] react router protected routes !!!
+- [ ] Pages to default export Components,hooks to regular export
 - [ ] fix apiHook, or something... redundant repeating
 - [ ] .....
 
 #### KNOWN BUGS:
 
 - [x] database syncing when first logged in
-- [ ] Only shows todos when more then one (confirmed)

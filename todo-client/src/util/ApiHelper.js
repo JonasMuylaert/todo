@@ -64,5 +64,15 @@ class ApiHelper {
 		});
 		return res;
 	}
+
+	async deleteList(listId) {
+		const res = await axios({
+			method: 'DELETE',
+			url: this.url.concat('lists/'),
+			headers: { Authorization: localStorage.Authorization },
+			params: { id: listId },
+		});
+		return res;
+	}
 }
 export default new ApiHelper();

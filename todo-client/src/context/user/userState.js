@@ -29,6 +29,7 @@ const UserState = props => {
 			res.data == true ? setAuth(true) : setAuth(false);
 		} catch (error) {
 			console.log('not logged in');
+			/* SIGN THAT SAYS: You are not logged in, do you wish to create an account ? or to Login ? */
 		}
 	};
 	useEffect(() => {

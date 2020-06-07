@@ -1,0 +1,41 @@
+.list-info {
+	float: left;
+	display: block;
+	margin: auto;
+	height: 50vh;
+	width: 100%;
+	&__list {
+		list-style-type: none;
+	}
+	&__list-item {
+		margin: 2rem 0;
+		padding: 3rem 0;
+		border-radius: 5px;
+		font-size: 3rem;
+	}
+	&__todos {
+		margin: 2rem 4rem;
+		background-color: white;
+	}
+	&__todos-list {
+		list-style-type: none;
+		padding: 2rem;
+		border-radius: 5px;
+	}
+	&__todos-list > a {
+		color: black;
+		text-decoration: none;
+		font-size: 2rem;
+	}
+	&__span {
+		margin: 0 1rem;
+	}
+	&__icons {
+		transform: translate(-3px, -5px);
+		&--info {
+			&:hover {
+				animation: spinner 1s ease-in-out infinite;
+			}
+		}
+	}
+}

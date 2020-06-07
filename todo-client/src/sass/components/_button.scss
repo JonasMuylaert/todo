@@ -51,4 +51,12 @@
 	&--yellow {
 		background-color: $color-primary-yellow;
 	}
+
+	&--big {
+		float: left;
+		width: 30vw;
+		display: block;
+		padding: 3rem;
+		margin: 2rem;
+	}
 }

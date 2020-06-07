@@ -16,7 +16,7 @@ export const useApi = (method, ...params) => {
 			const res = await ApiHelper[method](...params);
 			setTodos(res.data);
 		} catch (err) {
-			setError(err);
+			setError(err.respone);
 		} finally {
 			setLoading(false);
 		}

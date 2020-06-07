@@ -79,6 +79,6 @@ exports.verifyAuth = (req, res, next) => {
 	try {
 		res.status(200).json(true);
 	} catch (err) {
-		next(new Error('Un Auth'));
+		next(new Error('Un-Auth'));
 	}
 };

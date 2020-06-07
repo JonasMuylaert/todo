@@ -8,7 +8,7 @@ router.get('/', isAuth, listController.getListsByName, listController.getLists);
 
 router.post('/', isAuth, listController.addList);
 
-// router.post('/list', listController.removeList);
+router.delete('/', isAuth, listController.deleteList);
 
 // router.put('/list', listController.updateList);
 

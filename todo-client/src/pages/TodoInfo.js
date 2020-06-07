@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment, useContext } from 'react';
+import TodoContext from '../context/todo/todoContext';
+
+import { Error } from '../components/Error';
 //PAGE
 import EditTodo from '../components/EditToDo';
 //UTIL
@@ -7,10 +10,10 @@ import { dateParser } from '../util/helperFunctions';
 //CUSTOM HOOKS
 
 const TodoInfo = props => {
+	const todoContext = useContext(TodoContext);
+	const { loading, error, setError, setLoading } = todoContext;
 	const [visible, setVisible] = useState(false);
-	const [error, setError] = useState(false);
 	const [todo, setTodo] = useState(null);
-	const [loading, setLoading] = useState(false);
 
 	const { id } = props.match.params;
 
@@ -22,7 +25,7 @@ const TodoInfo = props => {
 			console.log(res);
 			setTodo(...res.data);
 		} catch (error) {
-			setError(true);
+			setError(error.response);
 		} finally {
 			setLoading(false);
 		}
@@ -40,51 +43,54 @@ const TodoInfo = props => {
 	};
 	if (todo) {
 		return (
-			<div className="todo-card">
-				{visible ? (
-					<EditTodo
-						id={id}
-						title={todo.title}
-						date={new Date(todo.date_todo)}
-						urgency={todo.urgency}
-						description={todo.description}
-						visible={setVis}
-						refr={fetchData}
-						setError={setErr}
-					/>
-				) : null}
-				<div className="todo-info">
-					<h2 className="todo-info__title secundary-title">{todo.title}</h2>
-					<div className="todo-info__user">
-						<span className="todo-info__key">Author: </span>
-						<span className="todo-info__value">
-							{todo.first_name} {todo.last_name}
-						</span>
+			<Fragment>
+				{error && <Error error={error} />}
+				<div className="todo-card">
+					{visible ? (
+						<EditTodo
+							id={id}
+							title={todo.title}
+							date={new Date(todo.date_todo)}
+							urgency={todo.urgency}
+							description={todo.description}
+							visible={setVis}
+							refr={fetchData}
+							setError={setErr}
+						/>
+					) : null}
+					<div className="todo-info">
+						<h2 className="todo-info__title secundary-title">{todo.title}</h2>
+						<div className="todo-info__user">
+							<span className="todo-info__key">Author: </span>
+							<span className="todo-info__value">
+								{todo.first_name} {todo.last_name}
+							</span>
+						</div>
+						<div className="todo-info__date">
+							<span className="todo-info__key">Todo date: </span>
+							<span className="todo-info__value">
+								{dateParser(todo.date_todo)}
+							</span>
+						</div>
+						<div className="todo-info__list">
+							<span className="todo-info__key">list: </span>
+							<span className="todo-info__value">{todo.name}</span>
+						</div>
+						<div className="todo-info__description">
+							<span className="todo-info__key">Description: </span>
+							<span className="todo-info__value">{todo.description}</span>
+						</div>
 					</div>
-					<div className="todo-info__date">
-						<span className="todo-info__key">Todo date: </span>
-						<span className="todo-info__value">
-							{dateParser(todo.date_todo)}
-						</span>
-					</div>
-					<div className="todo-info__list">
-						<span className="todo-info__key">list: </span>
-						<span className="todo-info__value">{todo.name}</span>
-					</div>
-					<div className="todo-info__description">
-						<span className="todo-info__key">Description: </span>
-						<span className="todo-info__value">{todo.description}</span>
-					</div>
+					<button
+						className="btn btn--yellow u-float-right"
+						onClick={() => setVisible(!visible)}
+					>
+						<a className="btn__text" href="#edit-todo">
+							Edit
+						</a>
+					</button>
 				</div>
-				<button
-					className="btn btn--yellow u-float-right"
-					onClick={() => setVisible(!visible)}
-				>
-					<a className="btn__text" href="#edit-todo">
-						Edit
-					</a>
-				</button>
-			</div>
+			</Fragment>
 		);
 	} else {
 		return (
