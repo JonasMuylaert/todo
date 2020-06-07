@@ -43,12 +43,14 @@ exports.postLogin = async (req, res, next) => {
 	if (!error) {
 		//Find user
 		const user = await User.getUserByEmail(req.body.email);
+		console.log(user);
 		if (user) {
 			//Compare password
 			const passwordMatch = await bcrypt.compare(
 				req.body.password,
 				user.password
 			);
+			console.log(passwordMatch);
 			if (passwordMatch) {
 				const token = jwt.sign(
 					{

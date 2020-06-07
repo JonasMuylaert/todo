@@ -7,7 +7,6 @@
 		"@testing-library/react": "^9.5.0",
 		"@testing-library/user-event": "^7.2.1",
 		"axios": "^0.19.2",
-		"node-sass": "^4.14.1",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-input-color": "^3.0.0",
@@ -19,7 +18,11 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"compile-sass": "node-sass ./src/sass/main.scss -o ./src/style -w"
+		"compile-sass": "node-sass ./src/sass/main.scss -o ./src/style",
+		"watch-sass": "node-sass ./src/sass/main.scss ./src/style/main.css -w",
+		"concat-css": "concat -o ./style/main.concat.css ./style/main.comp.css",
+		"prefix-css": "postcss --use autoprefixer -b 'last 10 versions' ./css/style/main.concat.css -o ./css/style.prefix.css",
+		"compress-css": "node-sass ./style/main.prefix.css ./style/main.css --output-style compressed"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -35,5 +38,11 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"devDependencies": {
+		"autoprefixer": "^9.8.0",
+		"concat": "^1.0.3",
+		"node-sass": "^4.14.1",
+		"postcss-cli": "^7.1.0"
 	}
 }

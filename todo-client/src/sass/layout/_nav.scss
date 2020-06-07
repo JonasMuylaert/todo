@@ -1,0 +1,25 @@
+.nav {
+	&__list {
+		padding: 1rem;
+		margin-bottom: 1rem;
+		background-color: $color-primary-blue;
+	}
+	&__list-item {
+		display: inline-block;
+	}
+	&__list-item-link,
+	&__list-item-link:link {
+		padding: 0 2rem;
+		text-decoration: none;
+		color: white;
+		text-transform: uppercase;
+
+		&--active {
+			color: $color-primary-yellow;
+		}
+
+		&:hover {
+			color: $color-primary-yellow;
+		}
+	}
+}

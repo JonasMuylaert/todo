@@ -15,9 +15,13 @@ const Todo = ({ id, urgency, firstName, lastName, date, children, done }) => {
 		try {
 			setLoading(true);
 			const res = await ApiHelper.deleteTodo(id);
-			fetchData();
+			if (res.status === 200) {
+				fetchData();
+			} else {
+				setError(res.message);
+			}
 		} catch (error) {
-			console.log(error);
+			setError(error);
 		} finally {
 			setLoading(false);
 		}
@@ -26,10 +30,13 @@ const Todo = ({ id, urgency, firstName, lastName, date, children, done }) => {
 		try {
 			setLoading(true);
 			const res = await ApiHelper.updateTodo(id, { done: done === 0 ? 1 : 0 });
-			console.log(res);
-			fetchData();
+			if (res.status === 200) {
+				fetchData();
+			} else {
+				setError(res.message);
+			}
 		} catch (error) {
-			console.log(error);
+			setError(error);
 		} finally {
 			setLoading(false);
 		}
@@ -41,7 +48,7 @@ const Todo = ({ id, urgency, firstName, lastName, date, children, done }) => {
 				{firstName} {lastName}
 			</div>
 			<span className="todos__date">{dateParser(date)}</span>
-			<Link to={`/${id}`}>
+			<Link to={`/${id}`} className="todos__link">
 				<div className="todos__content">{children}</div>
 			</Link>
 			{isAuth && (

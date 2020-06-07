@@ -35,11 +35,12 @@ const Home = () => {
 		setLists(res.data);
 	};
 	useEffect(() => {
+		fetchData();
 		if (isAuth) {
 			fetchTodosWithNoList();
 			fetchListNames();
 		}
-	}, []);
+	}, [isAuth]);
 
 	return (
 		<div>
@@ -56,11 +57,11 @@ const Home = () => {
 				/>
 				<label className="form__label form__label--text"></label>
 			</div>
-			<div className="u-wrapper-center">
+			<div className="u-center-text">
 				{isAuth && (
 					<Fragment>
 						<button
-							className="btn btn--green"
+							className="btn btn--yellow"
 							onClick={() => {
 								setVisible(!visible);
 							}}
@@ -70,7 +71,7 @@ const Home = () => {
 							</a>
 						</button>
 						<button
-							className="btn btn--green"
+							className="btn btn--yellow"
 							onClick={() => {
 								setVisible(!visible);
 							}}

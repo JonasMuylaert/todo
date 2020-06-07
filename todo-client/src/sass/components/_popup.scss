@@ -1,0 +1,31 @@
+.popup-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 1000;
+	-webkit-backdrop-filter: blur(1rem);
+	backdrop-filter: blur(1rem);
+	opacity: 0;
+	visibility: hidden;
+	transition: all 300ms ease-out;
+
+	&:target {
+		opacity: 1;
+		visibility: visible;
+	}
+	&:target &__content {
+		transform: translate(-50%, -50%) scale(1);
+	}
+	&__content {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: #fff;
+		width: 50%;
+		padding: 3rem 2rem;
+		transform: scale(0);
+	}
+}

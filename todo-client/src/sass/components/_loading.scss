@@ -1,0 +1,8 @@
+.loading {
+	text-align: center;
+	&--spinner {
+		margin: 2rem;
+		font-size: 4rem;
+		animation: spinner 1.2s linear infinite;
+	}
+}

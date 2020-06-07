@@ -7,7 +7,7 @@ import Auth from '../util/Auth';
 import { useForm } from '../hooks/useForm';
 const SignUp = () => {
 	const todoContext = useContext(TodoContext);
-	const { setLoading, setError } = todoContext;
+	const { setLoading, setError, fetchData } = todoContext;
 	const history = useHistory();
 
 	const { handleChange, handleSubmit, values } = useForm(signUp);
@@ -16,6 +16,11 @@ const SignUp = () => {
 		try {
 			setLoading(true);
 			const res = await Auth.signUp(values);
+			if (res.status) {
+				fetchData();
+			} else {
+				setError(res.message);
+			}
 		} catch (error) {
 			console.log(error);
 			setError(error);
@@ -103,7 +108,9 @@ const SignUp = () => {
 						<span className="form__span">Re-enter Password</span>
 					</label>
 				</div>
-				<input type="submit" className="btn btn--green" value="Sign up" />
+				<button type="submit" className="btn btn--yellow">
+					<span className="btn__text">Sign up</span>
+				</button>
 			</form>
 		</div>
 	);

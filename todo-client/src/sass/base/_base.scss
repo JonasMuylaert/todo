@@ -1,0 +1,29 @@
+*,
+*::after,
+*::before {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: inherit;
+}
+html {
+	font-size: 62.5%; //1rem == 10px
+
+	@include respond(tab-landscape) {
+		font-size: 56.25%; //1rem = 9px
+	}
+
+	@include respond(tab-portrait) {
+		font-size: 50%; //1rem = 8px
+	}
+
+	@include respond(big-desktop) {
+		font-size: 75%; //1rem = 12px
+	}
+}
+body {
+	box-sizing: border-box;
+
+	@include respond(tab-portrait) {
+		padding: 0;
+	}
+}

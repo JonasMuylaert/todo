@@ -19,17 +19,16 @@ const Login = () => {
 		setError(null);
 		try {
 			setLoading(true);
-
 			const res = await Auth.login(values);
 			if (res.status === 200) {
 				localStorage.setItem('Authorization', res.data.token);
 				setAuth(true);
+				history.push('/');
 			}
 		} catch (error) {
-			setError(error);
+			setError(error.response);
 		} finally {
 			setLoading(false);
-			history.push('/');
 		}
 	}
 	return (
@@ -61,7 +60,7 @@ const Login = () => {
 						<span className="form__span">Password</span>
 					</label>
 				</div>
-				<button type="submit" className="btn btn--green" value="Login">
+				<button type="submit" className="btn btn--yellow" value="Login">
 					<span className="btn__text">Login</span>
 				</button>
 			</form>

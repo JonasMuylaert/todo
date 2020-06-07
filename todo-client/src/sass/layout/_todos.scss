@@ -1,0 +1,50 @@
+.todos {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	list-style-type: none;
+	text-align: center;
+
+	&__item {
+		border: 3px solid #3383a3;
+		border-radius: 4px;
+		display: block;
+		text-transform: uppercase;
+		margin: 1rem 2rem;
+		padding: 1rem;
+		position: relative;
+	}
+	&__link {
+		text-decoration: none;
+		color: black;
+	}
+	&__title {
+		font-size: 2rem;
+		margin-bottom: 2rem;
+		padding-bottom: 1rem;
+		border-bottom: 1px solid black;
+
+		&:hover {
+			color: $color-primary-blue;
+		}
+	}
+	&__icon {
+		font-size: 3rem;
+		cursor: pointer;
+
+		&:not(:last-child) {
+			padding-right: 2rem;
+		}
+	}
+
+	&__name {
+		float: left;
+		margin: 1rem;
+		padding: 0 2rem 2rem 0;
+	}
+	&__date {
+		float: right;
+		margin: 1rem;
+		padding: 0 0 2rem 2rem;
+		text-decoration: underline;
+	}
+}

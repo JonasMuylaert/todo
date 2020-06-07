@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 //PAGE
 import EditTodo from '../components/EditToDo';
 //UTIL
@@ -77,7 +77,7 @@ const TodoInfo = props => {
 					</div>
 				</div>
 				<button
-					className="btn btn--green u-float-right"
+					className="btn btn--yellow u-float-right"
 					onClick={() => setVisible(!visible)}
 				>
 					<a className="btn__text" href="#edit-todo">

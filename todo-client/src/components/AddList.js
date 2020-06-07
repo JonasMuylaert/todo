@@ -5,7 +5,6 @@ import ApiHelper from '../util/ApiHelper';
 import InputColor from 'react-input-color';
 //CUSTOM HOOKS
 import { useForm } from '../hooks/useForm';
-import { useApi } from '../hooks/useApi';
 
 const AddToDo = props => {
 	const { handleSubmit, handleChange, values } = useForm(submit);
@@ -16,7 +15,11 @@ const AddToDo = props => {
 		try {
 			//Send addtodo
 			const res = await ApiHelper.addList(values);
-			fetchData();
+			if (res.status === 200) {
+				fetchData();
+			} else {
+				setError(res.message);
+			}
 
 			props.visible(false);
 		} catch (err) {

@@ -1,0 +1,7 @@
+.header {
+	height: 30vh;
+	position: relative;
+	&__title {
+		@include centerAbsolute;
+	}
+}

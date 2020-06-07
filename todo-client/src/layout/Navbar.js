@@ -8,25 +8,23 @@ const Navbar = () => {
 		<header className="nav-container">
 			<nav className="nav" id="#nav">
 				<ul className="nav__list">
-					<li>
+					<li className="nav__list-item">
 						<NavLink
 							exact
 							to="/"
-							className="nav__list-item"
-							activeClassName="nav__list-item--active"
-							exact
+							className="nav__list-item-link"
+							activeClassName="nav__list-item-link--active"
 						>
 							Home
 						</NavLink>
 					</li>
 					{isAuth && (
-						<li>
+						<li className="nav__list-item">
 							<NavLink
 								exact
 								to="/calendar"
-								className="nav__list-item"
+								className="nav__list-item-link"
 								activeClassName="nav__list-item--active"
-								exact
 							>
 								Calendar
 							</NavLink>
@@ -34,25 +32,24 @@ const Navbar = () => {
 					)}
 					{isAuth ? (
 						<Fragment>
-							<li className="u-float-right">
+							<li className="u-float-right nav__list-item">
 								<NavLink
 									to="/"
 									onClick={() => {
 										localStorage.removeItem('Authorization');
 										setAuth(false);
 									}}
-									className="nav__list-item"
+									className="nav__list-item-link"
 								>
 									Logout
 								</NavLink>
 							</li>
-							<li className="u-float-right">
+							<li className="u-float-right nav__list-item">
 								<NavLink
 									exact
 									to="/user"
-									className="nav__list-item"
-									activeClassName="nav__list-item--active"
-									exact
+									className="nav__list-item-link"
+									activeClassName="nav__list-item-link--active"
 								>
 									User
 								</NavLink>
@@ -60,24 +57,22 @@ const Navbar = () => {
 						</Fragment>
 					) : (
 						<Fragment>
-							<li className="u-float-right">
+							<li className="u-float-right nav__list-item">
 								<NavLink
 									exact
 									to="/login"
-									className="nav__list-item"
-									activeClassName="nav__list-item--active"
-									exact
+									className="nav__list-item-link"
+									activeClassName="nav__list-item-link--active"
 								>
 									Login
 								</NavLink>
 							</li>
-							<li className="u-float-right">
+							<li className="u-float-right nav__list-item">
 								<NavLink
 									exact
 									to="/signup"
-									className="nav__list-item"
-									activeClassName="nav__list-item--active"
-									exact
+									className="nav__list-item-link"
+									activeClassName="nav__list-item-link--active"
 								>
 									Signup
 								</NavLink>

@@ -1,0 +1,54 @@
+// .btn {
+//   display: inline-block;
+//   margin: 2rem 2rem 2rem 0;
+//   border-radius: 10px;
+//   padding: 1rem;
+//   background-color: whitesmoke;
+//   border-style: none;
+//   transition: all 300ms; }
+//   .btn--green {
+//     background-color: #d9d636; }
+//   .btn:hover, .btn:active {
+//     cursor: pointer;
+//     background-color: #3383a3;
+//     transform: translateY(-5px); }
+//   .btn__text,
+//   .btn__text :link,
+//   .btn__text :visited {
+//     padding: 2rem;
+//     text-decoration: none;
+//     color: black;
+//     text-transform: uppercase; }
+//   .btn__text:hover, .btn__text:active {
+//     color: white; }
+.btn {
+	display: inline-block;
+	margin: 2rem 2rem 2rem 0;
+	border-radius: 10px;
+	padding: 1rem;
+	background-color: whitesmoke;
+	border-style: none;
+	transition: all 300ms;
+
+	&:hover,
+	&:active {
+		cursor: pointer;
+		background-color: #3383a3;
+		transform: translateY(-5px);
+	}
+	&__text {
+		padding: 2rem;
+		text-decoration: none;
+		color: white;
+		text-transform: uppercase;
+
+		&:active,
+		&:visited {
+			color: white;
+		}
+	}
+
+	&--yellow {
+		background-color: $color-primary-yellow;
+	}
+}
