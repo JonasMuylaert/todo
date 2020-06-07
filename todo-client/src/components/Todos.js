@@ -53,6 +53,7 @@ const Todos = () => {
 								lastName={todo.last_name}
 								date={todo.date_todo}
 								done={todo.done}
+								color={todo.color}
 							>
 								{renderTodo(todo, index)}
 							</Todo>

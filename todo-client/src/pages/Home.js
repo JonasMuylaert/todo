@@ -7,12 +7,14 @@ import Todos from '../components/Todos.js';
 import AddToDo from '../components/AddToDo';
 import AddList from '../components/AddList';
 
+import { Error } from '../components/Error';
+
 import ApiHelper from '../util/ApiHelper';
 
 const Home = () => {
 	const todoContext = useContext(TodoContext);
 	const userContext = useContext(UserContext);
-	const { loading, error, fetchData } = todoContext;
+	const { loading, error, fetchData, setError } = todoContext;
 	const { isAuth } = userContext;
 	const [visible, setVisible] = useState(false);
 	const [query, setQuery] = useState('');
@@ -26,8 +28,12 @@ const Home = () => {
 		setQuery(e.target.value);
 	};
 	const fetchTodosWithNoList = async () => {
-		const res = await ApiHelper.getTodos({ list: 1 });
-		setNoListTodo(res.data.todos);
+		try {
+			const res = await ApiHelper.getTodos({ list: 1 });
+			setNoListTodo(res.data.todos);
+		} catch (error) {
+			setError(error.response);
+		}
 	};
 	const fetchListNames = async () => {
 		const res = await ApiHelper.getLists();
@@ -46,7 +52,7 @@ const Home = () => {
 		<div>
 			{visible ? <AddToDo visible={setVis} lists={lists} /> : null}
 			{visible ? <AddList visible={setVis} noListTodo={noListTodo} /> : null}
-			{error && <div className="error">An error occured...Try again later</div>}
+			{error && <Error error={error} />}
 			<div className="form__section form__section--search">
 				<input
 					value={query}

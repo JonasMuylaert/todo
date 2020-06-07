@@ -1,15 +1,12 @@
 const knex = require('../../../db/knex');
 const { tableNames } = require('../../constants/constants');
-
-const User = require('../users/userModel');
 //TODO CRUD QUERIES
 
 const { todos } = tableNames;
 
 // GET ALL TODOS
-module.exports = class Todos extends User {
+module.exports = class Todos {
 	constructor({ title, date_todo, urgency, description, user_id, list_id }) {
-		super();
 		this.title = title;
 		this.date_todo = date_todo;
 		this.urgency = urgency;
@@ -39,10 +36,12 @@ module.exports = class Todos extends User {
 				'todos.urgency',
 				'users.first_name',
 				'users.last_name',
-				'todos.done'
+				'todos.done',
+				'lists.color'
 			)
 			.from(todos)
-			.join('users', 'todos.user_id', '=', 'users.id')
+			.leftJoin('users', 'todos.user_id', '=', 'users.id')
+			.leftJoin('lists', 'todos.list_id', '=', 'lists.id')
 			.orderBy('title')
 			.limit(endIndex);
 	}

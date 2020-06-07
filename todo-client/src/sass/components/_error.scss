@@ -1,6 +1,6 @@
 .error {
+	position: relative;
 	display: block;
-	height: 3rem;
 	width: 50vh;
 	margin: auto;
 	background-color: orangered;
@@ -9,4 +9,8 @@
 	text-align: center;
 	padding: 1rem;
 	border-radius: 5px;
+
+	&__text {
+		font-weight: 400;
+	}
 }

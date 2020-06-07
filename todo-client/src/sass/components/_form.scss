@@ -94,6 +94,11 @@
 		}
 	}
 
+	&__color {
+		&--label {
+			display: block;
+		}
+	}
 	//weird movements
 	&__input:focus + &__label &__span,
 	&__input:valid + &__label &__span {

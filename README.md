@@ -57,7 +57,12 @@ empty db ?
 - [x] route protection
 - [ ] send all correct status codes
 - [ ] docker secrets??
-- [ ] Creating List model ...working on it
+- [ ] Crud lists model:
+  - [x] add List:
+  - [x] add list
+  - [x] display color of todos in a list
+  - [x] check if already exists
+  - [x] update todo when added to list
 - [ ] Comment model ...
 - [ ] ...
 
@@ -71,16 +76,17 @@ empty db ?
 - [x] setup react-router
 - [x] setup React context API for global state state hooks for local state
       => memory leak for errors ??
-- [ ] Login/signup error => don't redirect
+- [x] Login/signup error => don't redirect
 - [ ] signup correct => redirect to login page
-- [ ] login correct => redirect to home page
+- [x] login correct => redirect to home page
 - [ ] client side validation!
-- [ ] client side error checking
-- [ ] client side remove error when confirmed
+- [ ] client side error checking...busy
+- [x] client side remove error when confirmed
 - [ ] fix router (buggy)
 - [ ] fix apiHook, or something... redundant repeating
 - [ ] .....
 
 #### KNOWN BUGS:
 
-- [ ] database syncing when first logged in
+- [x] database syncing when first logged in
+- [ ] Only shows todos when more then one (confirmed)

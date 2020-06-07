@@ -1,5 +1,4 @@
 const Todo = require('./todoModel');
-const User = require('../users/userModel');
 
 exports.getTodos = async (req, res, next) => {
 	const limit = parseInt(req.query.limit);
@@ -47,12 +46,8 @@ exports.getTodoById = async (req, res, next) => {
 };
 
 exports.addTodo = async (req, res, next) => {
-	console.log(req.body);
 	const todo = new Todo({
-		title: req.body.title,
-		date_todo: req.body.date_todo,
-		urgency: req.body.urgency,
-		description: req.body.description,
+		...req.body,
 		user_id: req.user,
 		list_id: req.body.list_id ? req.body.list_id : 1,
 	});

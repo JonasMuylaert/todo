@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Navbar from './layout/Navbar';
@@ -10,6 +10,7 @@ import SignUp from './pages/SignUp';
 
 import TodoState from './context/todo/todoState';
 import UserState from './context/user/userState';
+
 import './style/main.css';
 
 function App() {

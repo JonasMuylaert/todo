@@ -19,7 +19,7 @@ const AddToDo = props => {
 
 			props.visible(false);
 		} catch (err) {
-			setError(err);
+			setError(err.response);
 		}
 	}
 

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import ApiHelper from '../util/ApiHelper';
 import { dateParser } from '../util/helperFunctions';
 
-const Todo = ({ id, urgency, firstName, lastName, date, children, done }) => {
+const Todo = ({ id, firstName, lastName, date, children, done, color }) => {
 	const todoContext = useContext(TodoContext);
 	const userContext = useContext(UserContext);
 	const { setLoading, setError, fetchData } = todoContext;
@@ -17,11 +17,9 @@ const Todo = ({ id, urgency, firstName, lastName, date, children, done }) => {
 			const res = await ApiHelper.deleteTodo(id);
 			if (res.status === 200) {
 				fetchData();
-			} else {
-				setError(res.message);
 			}
 		} catch (error) {
-			setError(error);
+			setError(error.response);
 		} finally {
 			setLoading(false);
 		}
@@ -30,20 +28,22 @@ const Todo = ({ id, urgency, firstName, lastName, date, children, done }) => {
 		try {
 			setLoading(true);
 			const res = await ApiHelper.updateTodo(id, { done: done === 0 ? 1 : 0 });
-			if (res.status === 200) {
+			console.log(res);
+			if (res.status === 202) {
 				fetchData();
-			} else {
-				setError(res.message);
 			}
 		} catch (error) {
-			setError(error);
+			setError(error.response);
 		} finally {
 			setLoading(false);
 		}
 	};
 
 	return (
-		<li className={`todos__item  ${done ? 'done' : ''}`}>
+		<li
+			className={`todos__item  ${done ? 'done' : ''}`}
+			style={{ borderColor: color }}
+		>
 			<div className="todos__name">
 				{firstName} {lastName}
 			</div>

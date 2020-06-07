@@ -1,6 +1,3 @@
-.u-center-text {
-	text-align: center !important;
-}
 .u-center-div {
 	margin: auto !important;
 }
@@ -33,4 +30,18 @@
 }
 .u-margin-top-huge {
 	margin-top: 10rem !important;
+}
+
+.very-urgent {
+	color: $color-secundary-red !important;
+}
+.urgent {
+	color: $color-secundary-orange !important;
+}
+
+.not-urgent {
+	color: $color-secundary-green !important;
+}
+.done {
+	text-decoration: line-through;
 }

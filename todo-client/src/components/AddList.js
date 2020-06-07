@@ -11,19 +11,18 @@ const AddToDo = props => {
 	const [color, setColor] = useState({});
 	const todoContext = useContext(TodoContext);
 	const { fetchData, setError } = todoContext;
+	values.color = color.hex; //mute values object
 	async function submit() {
 		try {
 			//Send addtodo
 			const res = await ApiHelper.addList(values);
 			if (res.status === 200) {
 				fetchData();
-			} else {
-				setError(res.message);
 			}
-
 			props.visible(false);
-		} catch (err) {
-			setError(err);
+		} catch (error) {
+			props.visible(false);
+			setError(error.response);
 		}
 	}
 	return (
