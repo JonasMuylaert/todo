@@ -48,7 +48,7 @@ const Todo = ({ id, firstName, lastName, date, children, done, color }) => {
 				{firstName} {lastName}
 			</div>
 			<span className="todos__date">{dateParser(date)}</span>
-			<Link to={`/${id}`} className="todos__link">
+			<Link to={`/todos/${id}`} className="todos__link">
 				<div className="todos__content">{children}</div>
 			</Link>
 			{isAuth && (

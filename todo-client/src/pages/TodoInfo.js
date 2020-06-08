@@ -2,8 +2,8 @@ import React, { useEffect, useState, Fragment, useContext } from 'react';
 import TodoContext from '../context/todo/todoContext';
 
 import { Error } from '../components/Error';
-//PAGE
-import EditTodo from '../components/EditToDo';
+//COMPONENT
+import AddTodo from '../components/AddToDo';
 //UTIL
 import ApiHelper from '../util/ApiHelper';
 import { dateParser } from '../util/helperFunctions';
@@ -35,9 +35,6 @@ const TodoInfo = props => {
 		fetchData();
 	}, []);
 
-	const setErr = val => {
-		setError(val);
-	};
 	const setVis = val => {
 		setVisible(val);
 	};
@@ -47,15 +44,13 @@ const TodoInfo = props => {
 				{error && <Error error={error} />}
 				<div className="todo-card">
 					{visible ? (
-						<EditTodo
+						<AddTodo
 							id={id}
 							title={todo.title}
 							date={new Date(todo.date_todo)}
 							urgency={todo.urgency}
 							description={todo.description}
 							visible={setVis}
-							refr={fetchData}
-							setError={setErr}
 						/>
 					) : null}
 					<div className="todo-info">

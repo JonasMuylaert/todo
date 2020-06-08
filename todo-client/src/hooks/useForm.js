@@ -18,9 +18,5 @@ export const useForm = apiCallback => {
 		apiCallback();
 	};
 
-	return {
-		handleChange,
-		handleSubmit,
-		values,
-	};
+	return [handleChange, handleSubmit, values];
 };

@@ -17,7 +17,7 @@ const Login = () => {
 	const { setAuth } = userContext;
 	const { setLoading, setError, error } = todoContext;
 
-	const { handleChange, handleSubmit, values } = useForm(login);
+	const [handleChange, handleSubmit, values] = useForm(login);
 	async function login() {
 		setError(null);
 		try {

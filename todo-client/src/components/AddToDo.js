@@ -1,27 +1,15 @@
 import React, { useContext } from 'react';
-import TodoContext from '../context/todo/todoContext';
-
-import ApiHelper from '../util/ApiHelper';
 
 //CUSTOM HOOKS
 import { useForm } from '../hooks/useForm';
-import { useApi } from '../hooks/useApi';
+import { useSubmit } from '../hooks/useSubmit';
 
 const AddToDo = props => {
-	const { handleSubmit, handleChange, values } = useForm(submit);
-	const todoContext = useContext(TodoContext);
-	const { fetchData, setError } = todoContext;
+	const [handleSubmit, handleChange, values] = useForm(submit);
 	async function submit() {
-		try {
-			//Send addtodo
-			const res = await ApiHelper.addTodo(values);
-			fetchData();
-
-			props.visible(false);
-		} catch (err) {
-			setError(err.response);
-		}
+		console.log('ello');
 	}
+	// const submit = useSubmit(props.visible, 'addTodo', values);
 
 	return (
 		<div className="popup-container" id="add-todo">

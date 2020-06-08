@@ -1,30 +1,19 @@
-import React, { useContext, useState, useEffect } from 'react';
-import TodoContext from '../context/todo/todoContext';
-import ApiHelper from '../util/ApiHelper';
+import React, { useState } from 'react';
 
 import InputColor from 'react-input-color';
 //CUSTOM HOOKS
 import { useForm } from '../hooks/useForm';
+import { useSubmit } from '../hooks/useSubmit';
 
-const AddToDo = props => {
-	const { handleSubmit, handleChange, values } = useForm(submit);
+const AddList = props => {
+	const [handleSubmit, handleChange, values] = useForm(submit);
 	const [color, setColor] = useState({});
-	const todoContext = useContext(TodoContext);
-	const { fetchData, setError } = todoContext;
 	values.color = color.hex; //mute values object
-	async function submit() {
-		try {
-			//Send addtodo
-			const res = await ApiHelper.addList(values);
-			if (res.status === 200) {
-				fetchData();
-			}
-			props.visible(false);
-		} catch (error) {
-			props.visible(false);
-			setError(error.response);
-		}
+	// const submit = useSubmit(props.visible, 'addList', values);
+	function submit() {
+		console.log('whut');
 	}
+
 	return (
 		<div className="popup-container" id="add-list">
 			<form className="popup-container__content form" onSubmit={handleSubmit}>
@@ -117,4 +106,4 @@ const AddToDo = props => {
 	);
 };
 
-export default AddToDo;
+export default AddList;

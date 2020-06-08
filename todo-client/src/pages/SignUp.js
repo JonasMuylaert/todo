@@ -12,7 +12,7 @@ const SignUp = () => {
 	const { setLoading, error, setError, fetchData } = todoContext;
 	const history = useHistory();
 
-	const { handleChange, handleSubmit, values } = useForm(signUp);
+	const [handleChange, handleSubmit, values] = useForm(signUp);
 	async function signUp() {
 		setError(null);
 		try {
