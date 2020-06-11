@@ -1,19 +1,42 @@
-import React, { useState } from 'react';
-
+import React, { useState, useContext, useEffect } from 'react';
 import InputColor from 'react-input-color';
+
+import TodoContext from '../context/todo/todoContext';
+//UTIL
+import ApiHelper from '../util/ApiHelper';
 //CUSTOM HOOKS
 import { useForm } from '../hooks/useForm';
-import { useSubmit } from '../hooks/useSubmit';
 
 const AddList = props => {
+	const todoContext = useContext(TodoContext);
+	const { loading, error, fetchData, setError, setLoading } = todoContext;
 	const [handleSubmit, handleChange, values] = useForm(submit);
 	const [color, setColor] = useState({});
+	const [todos, setTodos] = useState([]);
 	values.color = color.hex; //mute values object
-	// const submit = useSubmit(props.visible, 'addList', values);
-	function submit() {
-		console.log('whut');
+	async function submit() {
+		try {
+			setLoading(true);
+			const res = await ApiHelper.addTodo(values);
+			fetchData();
+			props.visible();
+		} catch (err) {
+			setError(err.response);
+		} finally {
+			setLoading(false);
+		}
 	}
-
+	const fetchTodos = async () => {
+		try {
+			const res = await ApiHelper.getTodos({ list: 1 });
+			setTodos(res.data.todos);
+		} catch (error) {
+			setError(error.response);
+		}
+	};
+	useEffect(() => {
+		fetchTodos();
+	}, []);
 	return (
 		<div className="popup-container" id="add-list">
 			<form className="popup-container__content form" onSubmit={handleSubmit}>
@@ -42,8 +65,8 @@ const AddList = props => {
 						onChange={handleChange}
 						defaultChecked="default"
 					>
-						<option id="default">No list</option>
-						{props.noListTodo.map((el, index) => (
+						<option id="default">No todo</option>
+						{todos.map((el, index) => (
 							<option key={index} value={el.id}>
 								{el.title}
 							</option>

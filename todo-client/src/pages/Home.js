@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, Fragment } from 'react';
 
-import TodoContext from '../context/todo/todoContext';
 import UserContext from '../context/user/userContext';
+import TodoContext from '../context/todo/todoContext';
 
 import Todos from '../components/Todos.js';
 import AddToDo from '../components/AddToDo';
@@ -9,54 +9,28 @@ import AddList from '../components/AddList';
 
 import { Error } from '../components/Error';
 
-import { useGetApi } from '../hooks/useGetApi';
-
-import ApiHelper from '../util/ApiHelper';
-
 const Home = () => {
-	const todoContext = useContext(TodoContext);
 	const userContext = useContext(UserContext);
-	const { loading, error, fetchData, setError } = todoContext;
+	const todoContext = useContext(TodoContext);
+	const { error, loading, fetchData } = todoContext;
 	const { isAuth } = userContext;
 	const [visible, setVisible] = useState(false);
 	const [query, setQuery] = useState('');
-	const [noListTodo, setNoListTodo] = useState([]);
-	const [lists, setLists] = useState([]);
 
-	const setVis = val => {
-		setVisible(val);
+	const setVis = () => {
+		setVisible(!visible);
 	};
 	const handleSearch = e => {
 		setQuery(e.target.value);
 	};
-	const fetchTodosWithNoList = async () => {
-		try {
-			const res = await ApiHelper.getTodos({ list: 1 });
-			setNoListTodo(res.data.todos);
-		} catch (error) {
-			setError(error.response);
-		}
-	};
-	const fetchListNames = async () => {
-		try {
-			const res = await ApiHelper.getLists();
-			setLists(res.data);
-		} catch (error) {
-			setError(error.response);
-		}
-	};
+
 	useEffect(() => {
 		fetchData();
-		if (isAuth) {
-			fetchTodosWithNoList();
-			fetchListNames();
-		}
-	}, [isAuth]);
-
+	}, []);
 	return (
 		<div>
-			{visible ? <AddToDo visible={setVis} lists={lists} /> : null}
-			{visible ? <AddList visible={setVis} noListTodo={noListTodo} /> : null}
+			{visible ? <AddToDo visible={setVis} mode={'add'} /> : null}
+			{visible ? <AddList visible={setVis} /> : null}
 			{error && <Error error={error} />}
 			<div className="form__section form__section--search">
 				<input

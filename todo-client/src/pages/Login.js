@@ -19,6 +19,7 @@ const Login = () => {
 
 	const [handleChange, handleSubmit, values] = useForm(login);
 	async function login() {
+		console.log('ello');
 		setError(null);
 		try {
 			setLoading(true);

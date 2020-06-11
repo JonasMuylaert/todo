@@ -57,7 +57,8 @@ module.exports = class Todos {
 				'todos.description',
 				'users.first_name',
 				'users.last_name',
-				'lists.name'
+				'lists.name',
+				'list_id'
 			)
 			.from(todos)
 			.join('users', function () {

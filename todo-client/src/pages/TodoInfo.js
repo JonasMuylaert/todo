@@ -22,7 +22,6 @@ const TodoInfo = props => {
 		try {
 			setLoading(true);
 			const res = await ApiHelper.getTodo(id);
-			console.log(res);
 			setTodo(...res.data);
 		} catch (error) {
 			setError(error.response);
@@ -51,6 +50,9 @@ const TodoInfo = props => {
 							urgency={todo.urgency}
 							description={todo.description}
 							visible={setVis}
+							mode={'edit'}
+							fetchTodo={fetchData}
+							list_id={todo.list_id}
 						/>
 					) : null}
 					<div className="todo-info">
@@ -90,9 +92,7 @@ const TodoInfo = props => {
 	} else {
 		return (
 			<div>
-				{error && (
-					<div className="error">An error occured...Try again later</div>
-				)}
+				{error && <Error />}
 				{loading && loading && (
 					<div className="loading">
 						<i className="fas fa-circle-notch loading--spinner"></i>
