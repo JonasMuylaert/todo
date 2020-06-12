@@ -60,7 +60,6 @@ empty db ?
 - [x] server side auth/validation
 - [x] route protection
 - [ ] send all correct status codes
-- [ ] docker secrets??
 - [ ] Crud lists model:
   - [x] add List:
   - [x] add list
