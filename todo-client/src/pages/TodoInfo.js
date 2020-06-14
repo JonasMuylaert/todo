@@ -1,7 +1,9 @@
 import React, { useEffect, useState, Fragment, useContext } from 'react';
 import TodoContext from '../context/todo/todoContext';
+import UserContext from '../context/user/userContext';
 
 import { Error } from '../components/Error';
+import { Comments } from '../components/Comments';
 //COMPONENT
 import AddTodo from '../components/AddToDo';
 //UTIL
@@ -11,7 +13,9 @@ import { dateParser } from '../util/helperFunctions';
 
 const TodoInfo = props => {
 	const todoContext = useContext(TodoContext);
+	const userContext = useContext(UserContext);
 	const { loading, error, setError, setLoading } = todoContext;
+	const { isAuth } = userContext;
 	const [visible, setVisible] = useState(false);
 	const [todo, setTodo] = useState(null);
 
@@ -78,15 +82,18 @@ const TodoInfo = props => {
 							<span className="todo-info__value">{todo.description}</span>
 						</div>
 					</div>
-					<button
-						className="btn btn--yellow u-float-right"
-						onClick={() => setVisible(!visible)}
-					>
-						<a className="btn__text" href="#edit-todo">
-							Edit
-						</a>
-					</button>
+					{isAuth && (
+						<button
+							className="btn btn--yellow u-float-right"
+							onClick={() => setVisible(!visible)}
+						>
+							<a className="btn__text" href="#edit-todo">
+								Edit
+							</a>
+						</button>
+					)}
 				</div>
+				<Comments todoId={id} />
 			</Fragment>
 		);
 	} else {

@@ -1,8 +1,6 @@
 const knex = require('../../../db/knex');
 const { tableNames } = require('../../constants/constants');
 
-const Todo = require('../todos/todoModel');
-
 module.exports = class List {
 	constructor({ name, color, description, user_id }) {
 		this.name = name;

@@ -309,6 +309,32 @@ body {
   font-size: 2rem;
   cursor: pointer; }
 
+.comments {
+  width: 60vw;
+  margin: 8rem auto; }
+  .comments__comment {
+    margin: 3rem 1rem;
+    height: auto;
+    padding: 1rem;
+    border: 1px solid black; }
+    .comments__comment--content {
+      margin: 1rem; }
+  .comments__info {
+    margin: 1rem;
+    padding: 3rem 0;
+    font-size: 2rem;
+    border-bottom: 1px solid black; }
+    .comments__info--likes, .comments__info--dislikes {
+      float: right; }
+    .comments__info--author {
+      float: left; }
+
+.comment__form {
+  width: 70vw;
+  margin: 2rem auto;
+  padding: 1rem;
+  transform: translateX(5%); }
+
 .nav__list {
   padding: 1rem;
   margin-bottom: 1rem;

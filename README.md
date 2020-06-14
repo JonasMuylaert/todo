@@ -96,7 +96,8 @@ empty db ?
 - [ ] when deleting, first show popup
 - [x] set placeholders
 - [ ] Pages to default export Components,hooks to regular export
-- [ ] fix apiHook, or something... redundant repeating:
+- [ ] fix apiHook, or something... redundant repeating
+- [ ] User check when editing
 
 #### KNOWN BUGS:
 

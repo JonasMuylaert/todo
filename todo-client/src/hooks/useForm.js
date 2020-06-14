@@ -16,6 +16,7 @@ export const useForm = apiCallback => {
 		e.preventDefault();
 		//do something
 		apiCallback();
+		setValue({});
 	};
 
 	return [handleChange, handleSubmit, values];

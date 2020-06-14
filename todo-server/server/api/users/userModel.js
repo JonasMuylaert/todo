@@ -5,6 +5,9 @@ module.exports = class User {
 	constructor(id) {
 		this.id = id;
 	}
+	static getUserById(id) {
+		return knex(users).select().where('id', id);
+	}
 	static getUserByEmail(email) {
 		return knex(users)
 			.select()

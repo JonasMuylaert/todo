@@ -74,5 +74,61 @@ class ApiHelper {
 		});
 		return res;
 	}
+
+	async getComments(todoId) {
+		const res = await axios({
+			method: 'GET',
+			url: this.url.concat(`comments/${todoId}`),
+			headers: { Authorization: localStorage.Authorization },
+		});
+		return res;
+	}
+
+	async addComment(todoId, content) {
+		const res = await axios({
+			method: 'POST',
+			url: this.url.concat(`comments/${todoId}`),
+			headers: { Authorization: localStorage.Authorization },
+			data: content,
+		});
+		return res;
+	}
+	async updateComment(todoId, commentId, type) {
+		let data;
+		if (type === 'like') {
+			data = {
+				likes: 1,
+				dislikes: 0,
+			};
+		} else if (type === 'dislike') {
+			data = {
+				dislikes: 1,
+				likes: 0,
+			};
+		} else if (type === 'even') {
+			data = {
+				dislikes: 0,
+				likes: 0,
+			};
+		}
+		const send = {
+			commentId,
+			data,
+		};
+		const res = await axios({
+			method: 'PUT',
+			url: this.url.concat(`comments/${todoId}`),
+			headers: { Authorization: localStorage.Authorization },
+			data: send,
+		});
+		return res;
+	}
+	async getUserById() {
+		const res = await axios({
+			method: 'GET',
+			headers: { Authorization: localStorage.Authorization },
+		});
+		return res;
+	}
 }
 export default new ApiHelper();

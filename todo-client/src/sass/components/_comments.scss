@@ -1,0 +1,27 @@
+.comments {
+	width: 60vw;
+	margin: 8rem auto;
+	&__comment {
+		margin: 3rem 1rem;
+		height: auto;
+		padding: 1rem;
+		border: 1px solid black;
+
+		&--content {
+			margin: 1rem;
+		}
+	}
+	&__info {
+		margin: 1rem;
+		padding: 3rem 0;
+		font-size: 2rem;
+		border-bottom: 1px solid black;
+		&--likes,
+		&--dislikes {
+			float: right;
+		}
+		&--author {
+			float: left;
+		}
+	}
+}
