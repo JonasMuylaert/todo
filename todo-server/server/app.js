@@ -8,7 +8,7 @@ const cors = require('cors');
 //local imports
 const todoRoutes = require('./api/todos/todoRoutes');
 const listRoutes = require('./api/lists/listRoutes');
-const userRoutes = require('./api/users');
+const userRoutes = require('./api/users/userRoutes');
 const commentsRoutes = require('./api/comments/commentsRoutes');
 const { notFound, errorHandler } = require('./middlewares/Error');
 const auth = require('./auth/authRouter');

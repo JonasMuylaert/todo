@@ -10,8 +10,7 @@ export const Comments = ({ todoId }) => {
 	const [handleChange, handleSubmit, values] = useForm(submit);
 	const todoContext = useContext(TodoContext);
 	const { setLoading, setError } = todoContext;
-  const [comments, setComments] = useState([]);
-  const [users]
+	const [comments, setComments] = useState([]);
 
 	const getComments = async () => {
 		setError(null);
